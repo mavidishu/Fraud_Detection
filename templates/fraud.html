@@ -15,14 +15,14 @@
     <!-- Navabar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark sticky-top" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">FraudShield</a>
+          <a class="navbar-brand" href="/">FraudShield</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Detect Fraud</a>
+                <a class="nav-link active" aria-current="page" href="/fraud">Detect Fraud</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Research & Insights</a>
@@ -36,8 +36,73 @@
         </div>
       </nav>
 
-    
+      <!-- Form to Submit a request -->
+    <div class="container mt-5">
+      <p>Please fill the following details to check a fraudlent transaction.</p>
+      <form class="row g-3" method="post" action="/result">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Step</label>
+          <input type="number" name="step" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Amount</label>
+          <input type="number" name="amount" class="form-control" id="inputPassword4">
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Sender</label>
+          <input type="text" class="form-control" id="inputAddress" name="nameOrig">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Old Balance Sender</label>
+          <input type="text" class="form-control" id="inputCity" name="oldbalanceOrg">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">New Balance Sender</label>
+          <input type="text" class="form-control" id="inputCity" name="newbalanceOrig">
+        </div>
+        <div class="col-md-12">
+          <label for="inputCity" class="form-label">Receiver</label>
+          <input type="text" class="form-control" id="inputCity" name="nameDest">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Old Balance Receiver</label>
+          <input type="text" class="form-control" id="inputCity" name="oldbalanceDest">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">New Balance Receiver</label>
+          <input type="text" class="form-control" id="inputCity" name="newbalanceDest">
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">Type</label>
+          <select id="inputState" class="form-select" name="type">
+            <option selected>Choose...</option>
+            <option value="TRANSFER">Transfer</option>
+            <option value="CASH_OUT">Cash Out</option>
+            <option value="CASH_OUT">Cash In</option>
+            <option value="PAYMENT">Payment</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+              Agree, You're feeding the model with data.
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Check Fraud</button>
+        </div>
+      </form>
+    </div>
 
+    <div class="result">
+      {% if result is not none %}
+        <div class="alert alert-success" role="alert">
+          {{ result }}
+        </div>
+      {% endif %}
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
